@@ -1,3 +1,2 @@
-node_modules/
-app/css/map/
-gulpfile-config.json
+/node_modules/
+/gulpfile-config.json
