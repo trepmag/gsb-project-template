@@ -9,22 +9,37 @@ var duration      = require('gulp-duration');
 var postcss       = require('gulp-postcss');
 var autoprefixer  = require('autoprefixer');
 var csswring      = require('csswring');
+var extend        = require('extend-object');
+var fs            = require('fs');
 
-var paths = {
-  app:  'app',
-  scss: 'app/scss',
-  css:  'app/css'
+var config = {
+  paths: {
+    app:  'app',
+    scss: 'app/scss',
+    css:  'app/css'
+  }
 };
 
+if( fs.existsSync('./gulpfile-config.json') ) {
+  var config_user = require('./gulpfile-config.json');
+  extend(config, config_user);
+}
+
+var paths = config.paths;
+
 gulp.task('browser-sync', function() {
-  //browserSync.init({
-  //  proxy: "localhost/gsp-project-template/app"
-  //});
-  browserSync.init({
-    server: {
-      baseDir: "./app/"
-    }
-  });
+  if (config.proxy !== undefined) {
+    browserSync.init({
+      proxy: config.proxy
+    });
+  }
+  else {
+    browserSync.init({
+      server: {
+        baseDir: paths.app
+      }
+    });
+  }
 });
 
 gulp.task('sass-dev', function() {
