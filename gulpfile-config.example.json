@@ -1,3 +1,13 @@
 {
-  "proxy": "localhost/gsb-project-template/app"
+  "proxy": "localhost/gsb-project-template/app",
+  "paths": {
+    "app": "app",
+    "scss": "scss",
+    "css": "css",
+    "watches": [
+      "app/*.html",
+      "app/js/**/*.js",
+      "app/templates/**/*.twig"
+    ]
+  }
 }

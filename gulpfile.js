@@ -12,11 +12,16 @@ var csswring      = require('csswring');
 var extend        = require('extend-object');
 var fs            = require('fs');
 
+// Use a gulpfile-config.json to customize the config bellow; see
+// gulpfile-config.example.json
 var config = {
   paths: {
-    app:  'app',
+    app:  'app', // App root, not necessary if using proxy
     scss: 'app/scss',
-    css:  'app/css'
+    css:  'app/css',
+    watches: [
+      'app/*.html'
+    ]
   }
 };
 
@@ -80,7 +85,9 @@ gulp.task('sass-prod', function () {
 
 gulp.task('watch', ['sass-dev', 'browser-sync'], function() {
   gulp.watch(paths.scss + "/**/*.scss", ['sass-dev']);
-  gulp.watch(paths.app + '/*.html').on('change', browserSync.reload);
+  for (var i in paths.watches) {
+    gulp.watch(paths.watches[i]).on('change', browserSync.reload);
+  }
 });
 
 /* Default task */
