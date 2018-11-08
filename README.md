@@ -14,6 +14,13 @@ $ $(npm bin)/gulp sass-dev
 $ $(npm bin)/gulp sass-prod
 ```
 
+Or equally:
+```
+$ npm run gulp watch
+$ npm run gulp sass-dev
+$ npm run gulp sass-prod
+```
+
 ## Config
 
 A gulpfile-config.json can be used to override some default configuration items.
